@@ -149,11 +149,11 @@ public class emailGen {
         }
 
     public static void main(String[] args) {
-            emailGen email1= new emailGen( "Efrem","Mickael");
-            emailGen email2= new emailGen("Natasha", "Kayeyi");
-            emailGen email3= new emailGen("Liam","Mickael");
-            emailGen email4= new emailGen("Nahom","Gizachew");
-            emailGen email5= new emailGen("Mehret","Aregawi");
+            emailGen email1= new emailGen( "Ef","Mark");
+            emailGen email2= new emailGen("Nar", "John");
+            emailGen email3= new emailGen("Lion","Joel");
+            emailGen email4= new emailGen("James","Rog");
+            emailGen email5= new emailGen("Alex","P");
     }
 }
 
