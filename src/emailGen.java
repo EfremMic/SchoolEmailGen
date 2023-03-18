@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -11,13 +13,16 @@ public class emailGen {
         private String department;
         private int parkingLot;
 
+        private int expiredate;
+
 
         //constractor
 
-        public emailGen(String fN,String lN){
+        public emailGen(String fN,String lN,int expiredate){
 
             this.firstName=fN;
             this.lastName=lN;
+            this.expiredate= expDate(expiredate);
             this.parkingLot= generateParkingLotNumber();
 
             System.out.println("Welcome "+ " " + this.firstName +" " + this.lastName);
@@ -26,6 +31,7 @@ public class emailGen {
             this.department=department();
             System.out.println("You chose the following department: " + this.department);
             System.out.println("=====================================================================================");
+
 
 
 
@@ -59,11 +65,28 @@ public class emailGen {
             this.randPassword= passGenerator(8);
             System.out.println("Your password is: "+ this.randPassword);
             System.out.println("Your parkingLot Nr is: " + this.parkingLot);
+            System.out.println("Your email will be deactivated in "+ this.expiredate+" days!");
             System.out.println("=====================================================================================");
             System.out.println("Feel free to contact us if you have any question regarding your e-mail setup");
             System.out.println("=====================================================================================");
 
         }
+
+    private  String getfirstName() {
+            return firstName;
+    }
+
+    private String getLastName(){
+            return lastName;
+    }
+
+    private int getParkingLot(){
+            return parkingLot;
+    }
+
+    private int getExpiredate(){
+            return expiredate;
+    }
 
 
 /*
@@ -91,6 +114,17 @@ public class emailGen {
         }
 
  */
+
+
+
+
+    public int expDate(int expiredate) {
+        LocalDate expireDate = LocalDate.of(expiredate / 10000, (expiredate / 100) % 100,
+                expiredate % 100);
+        long daysUntilExpiration = ChronoUnit.DAYS.between(LocalDate.now(), expireDate);
+        return (int) daysUntilExpiration;
+
+    }
         public String department() {
             System.out.println("Choose your department \n1.Science Department\n2 Physics Department \n3 English Department " +
                     "\n4 law Department");
@@ -149,11 +183,21 @@ public class emailGen {
         }
 
     public static void main(String[] args) {
-            emailGen email1= new emailGen( "Ef","Mark");
-            emailGen email2= new emailGen("Nar", "John");
-            emailGen email3= new emailGen("Lion","Joel");
-            emailGen email4= new emailGen("James","Rog");
-            emailGen email5= new emailGen("Alex","P");
+        emailGen[] emailArray = new emailGen[5]; // create an array of emailGen objects with a length of 5
+        emailArray[0] = new emailGen("Ef","Mark",20240331);
+        emailArray[1] = new emailGen("Nar", "John",20240930);
+        emailArray[2] = new emailGen("Lion","Joel",20240130);
+        emailArray[3] = new emailGen("James","Rog",20240530);
+        emailArray[4] = new emailGen("Alex","P",20260330);
+
+
+        for (int i=0; i< emailArray.length; i++){
+            emailGen email=emailArray[i];
+            System.out.println("Full Name :"+ email.getfirstName() +" "+ email.getLastName()+ " "+"Parkinglot Nr. : "+
+                    email.getParkingLot() + " Email- Expiredate in " +email.getExpiredate()+ " days!");
+        }
+
+
     }
 }
 
